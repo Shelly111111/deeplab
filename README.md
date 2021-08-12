@@ -1,24 +1,24 @@
-# DeepLab
+# DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs
 
-`deeplabpaddle`ÊÇ¸´ÏÖµÄpaddle´úÂë
-`deeplabpytorch`ÊÇÔ­pytorch´úÂë
-`torch2paddle.py`ÊÇÄ£ĞÍ×ª»¯ÎÄ¼ş
+`deeplabpaddle`æ˜¯å¤ç°çš„paddleä»£ç 
+`deeplabpytorch`æ˜¯åŸpytorchä»£ç 
+`torch2paddle.py`æ˜¯æ¨¡å‹è½¬åŒ–æ–‡ä»¶
 
-ĞèÒª°²×°µÚÈı·½¿âomegaconfºÍpydensecrf£¬pydensecrfµÄWindows°æ¿ÉÒÔÔÚhttps://www.lfd.uci.edu/~gohlke/pythonlibs/#pydensecrfÖĞÕÒµ½°²×°ÃüÁîÈçÏÂ£º
+éœ€è¦å®‰è£…ç¬¬ä¸‰æ–¹åº“omegaconfå’Œpydensecrfï¼Œpydensecrfçš„Windowsç‰ˆå¯ä»¥åœ¨https://www.lfd.uci.edu/~gohlke/pythonlibs/#pydensecrfä¸­æ‰¾åˆ°å®‰è£…å‘½ä»¤å¦‚ä¸‹ï¼š
 ```
 pip install pydensecrf-1.0rc2-cp37-cp37m-win_amd64.whl
 pip install omegaconf
 ```
-ÓÉÓÚgitÉÏ´«ÏŞÖÆ£¬Ä£ĞÍĞèÒªÏÈÊ¹ÓÃtorch2paddle.py½øĞĞ×ª»¯
+ç”±äºgitä¸Šä¼ é™åˆ¶ï¼Œæ¨¡å‹éœ€è¦å…ˆä½¿ç”¨torch2paddle.pyè¿›è¡Œè½¬åŒ–
 ```
 python torch2paddle.py
 ```
 
-ÔËĞĞpaddle´úÂëÇëÊ¹ÓÃ
+è¿è¡Œpaddleä»£ç è¯·ä½¿ç”¨
 ```
 cd deeplabpaddle
 python run.py train --config-path configs/voc12.yaml --cuda
 ```
-paddle×îÖÕµÃ·ÖÎÄ¼şÔÚ`deeplabpaddle/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`ÖĞ£¬ÔÚVOC12ÉÏµÄmiouÎª0.8987213899844988
-pytorch×îÖÕµÃ·ÖÎÄ¼şÔÚ`deeplabpytorch/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`ÖĞ£¬ÔÚVOC12ÉÏµÄmiouÎª0.8987214672262349
+paddleæœ€ç»ˆå¾—åˆ†æ–‡ä»¶åœ¨`deeplabpaddle/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`ä¸­ï¼Œåœ¨VOC12ä¸Šçš„miouä¸º0.8987213899844988
+pytorchæœ€ç»ˆå¾—åˆ†æ–‡ä»¶åœ¨`deeplabpytorch/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`ä¸­ï¼Œåœ¨VOC12ä¸Šçš„miouä¸º0.8987214672262349
 
