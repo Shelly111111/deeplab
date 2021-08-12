@@ -17,7 +17,15 @@ python torch2paddle.py
 运行paddle代码请使用
 ```
 cd deeplabpaddle
-python run.py train --config-path configs/voc12.yaml --cuda
+python main.py train --config-path configs/voc12.yaml --cuda
+```
+运行测试代码可使用
+```
+python main.py test --config-path configs/voc12.yaml --model-path  data/models/voc12/deeplabv2_resnet101_msc/train/deeplabv2_resnet101_msc-vocaug.pdparams
+```
+运行crf测试
+```
+python main.py crf --config-path configs/voc12.yaml
 ```
 paddle最终得分文件在`deeplabpaddle/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`中，在VOC12上的miou为0.8987213899844988
 pytorch最终得分文件在`deeplabpytorch/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`中，在VOC12上的miou为0.8987214672262349
