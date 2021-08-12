@@ -30,3 +30,7 @@ python main.py crf --config-path configs/voc12.yaml
 paddle最终得分文件在`deeplabpaddle/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`中，在VOC12上的miou为0.8987213899844988
 pytorch最终得分文件在`deeplabpytorch/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`中，在VOC12上的miou为0.8987214672262349
 
+模型、数据集以及代码文件分享到网盘
+链接：https://pan.baidu.com/s/1zG8kW8DYlYqcZi-nu9IvqQ 
+提取码：zki2
+7天内有效
