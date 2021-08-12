@@ -31,7 +31,8 @@ paddle最终得分文件在`deeplabpaddle/data/scores/voc12/deeplabv2_resnet101_msc/val
 
 pytorch最终得分文件在`deeplabpytorch/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`中，在VOC12上的miou为0.8987214672262349
 
-
+论文精度为：
+![miou](miou.png)
 
 由于git上传限制，项目完整代码、模型、训练日志和数据集均在百度网盘，链接有效期7天，
 
