@@ -1,36 +1,32 @@
 # DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs
 
-`deeplabpaddle`æ˜¯å¤ç°çš„paddleä»£ç 
-`deeplabpytorch`æ˜¯åŸpytorchä»£ç 
-`torch2paddle.py`æ˜¯æ¨¡å‹è½¬åŒ–æ–‡ä»¶
+`deeplabpaddle`ÊÇ¸´ÏÖµÄpaddle´úÂë
+`deeplabpytorch`ÊÇÔ­pytorch´úÂë
+`torch2paddle.py`ÊÇÄ£ĞÍ×ª»¯ÎÄ¼ş
 
-éœ€è¦å®‰è£…ç¬¬ä¸‰æ–¹åº“omegaconfå’Œpydensecrfï¼Œpydensecrfçš„Windowsç‰ˆå¯ä»¥åœ¨https://www.lfd.uci.edu/~gohlke/pythonlibs/#pydensecrfä¸­æ‰¾åˆ°å®‰è£…å‘½ä»¤å¦‚ä¸‹ï¼š
+ĞèÒª°²×°µÚÈı·½¿âomegaconfºÍpydensecrf£¬pydensecrfµÄWindows°æ¿ÉÒÔÔÚhttps://www.lfd.uci.edu/~gohlke/pythonlibs/#pydensecrfÖĞÕÒµ½°²×°ÃüÁîÈçÏÂ£º
 ```
 pip install pydensecrf-1.0rc2-cp37-cp37m-win_amd64.whl
 pip install omegaconf
 ```
-ç”±äºgitä¸Šä¼ é™åˆ¶ï¼Œæ¨¡å‹éœ€è¦å…ˆä½¿ç”¨torch2paddle.pyè¿›è¡Œè½¬åŒ–
+ÓÉÓÚgitÉÏ´«ÏŞÖÆ£¬Ä£ĞÍĞèÒªÏÈÊ¹ÓÃtorch2paddle.py½øĞĞ×ª»¯
 ```
 python torch2paddle.py
 ```
 
-è¿è¡Œpaddleä»£ç è¯·ä½¿ç”¨
+ÔËĞĞpaddle´úÂëÇëÊ¹ÓÃ
 ```
 cd deeplabpaddle
 python main.py train --config-path configs/voc12.yaml --cuda
 ```
-è¿è¡Œæµ‹è¯•ä»£ç å¯ä½¿ç”¨
+ÔËĞĞ²âÊÔ´úÂë¿ÉÊ¹ÓÃ
 ```
 python main.py test --config-path configs/voc12.yaml --model-path  data/models/voc12/deeplabv2_resnet101_msc/train/deeplabv2_resnet101_msc-vocaug.pdparams
 ```
-è¿è¡Œcrfæµ‹è¯•
+ÔËĞĞcrf²âÊÔ
 ```
 python main.py crf --config-path configs/voc12.yaml
 ```
-paddleæœ€ç»ˆå¾—åˆ†æ–‡ä»¶åœ¨`deeplabpaddle/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`ä¸­ï¼Œåœ¨VOC12ä¸Šçš„miouä¸º0.8987213899844988
-pytorchæœ€ç»ˆå¾—åˆ†æ–‡ä»¶åœ¨`deeplabpytorch/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`ä¸­ï¼Œåœ¨VOC12ä¸Šçš„miouä¸º0.8987214672262349
+paddle×îÖÕµÃ·ÖÎÄ¼şÔÚ`deeplabpaddle/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`ÖĞ£¬ÔÚVOC12ÉÏµÄmiouÎª0.8987213899844988
+pytorch×îÖÕµÃ·ÖÎÄ¼şÔÚ`deeplabpytorch/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`ÖĞ£¬ÔÚVOC12ÉÏµÄmiouÎª0.8987214672262349
 
-æ¨¡å‹ã€æ•°æ®é›†ä»¥åŠä»£ç æ–‡ä»¶åˆ†äº«åˆ°ç½‘ç›˜
-é“¾æ¥ï¼šhttps://pan.baidu.com/s/1zG8kW8DYlYqcZi-nu9IvqQ 
-æå–ç ï¼šzki2
-7å¤©å†…æœ‰æ•ˆ
