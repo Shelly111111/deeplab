@@ -42,8 +42,10 @@ paddle在VOC12 crf后的得分文件在`deeplabpaddle/data/scores/voc12/deeplabv2_resnet
 论文精度为：
 ![miou](miou.png)
 
-由于git上传限制，项目完整代码、模型、训练日志和数据集均在百度网盘，链接有效期7天，
+由于git上传限制，项目完整代码、模型、训练日志均在百度网盘，链接有效期7天，
 
-链接：https://pan.baidu.com/s/1HhUSPmh0JN261BtlN29klQ 
+链接：https://pan.baidu.com/s/1fVIuZzJJdxhNmK8z1JrqEQ 
 
-提取码：ddzj
+提取码：js9o
+
+cityscapes的数据集请从：https://aistudio.baidu.com/aistudio/datasetdetail/64550下载
