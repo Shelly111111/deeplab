@@ -20,7 +20,6 @@ import paddle.nn.functional as F
 from omegaconf import OmegaConf
 from PIL import Image
 from visualdl import LogWriter
-#from torchnet.meter import MovingAverageValueMeter
 from tqdm import tqdm
 
 from libs.datasets import get_dataset
@@ -104,7 +103,6 @@ def train(config_path, cuda):
     # Configuration
     CONFIG = OmegaConf.load(config_path)
     get_device(cuda)
-    #torch.backends.cudnn.benchmark = True
 
     # Dataset
     dataset = get_dataset(CONFIG.DATASET.NAME)(
@@ -138,14 +136,6 @@ def train(config_path, cuda):
     # Model setup
     model = DeepLabV2_ResNet101_MSC(n_classes=CONFIG.DATASET.N_CLASSES)
 
-    #state_dict = paddle.load(CONFIG.MODEL.INIT_MODEL)
-    #print("    Init:", CONFIG.MODEL.INIT_MODEL)
-    #for m in model.base.state_dict().keys():
-    #    if m not in state_dict.keys():
-    #        print("    Skip init:", m)
-    #model.base.load_state_dict(state_dict, strict=False)  # to skip ASPP
-    #model = nn.DataParallel(model)
-
     # Loss definition
     criterion = nn.CrossEntropyLoss(ignore_index=CONFIG.DATASET.IGNORE_LABEL,axis = 1)
     # Learning rate scheduler
@@ -160,31 +150,12 @@ def train(config_path, cuda):
         learning_rate=scheduler,
         parameters= model.parameters(),
         weight_decay=CONFIG.SOLVER.WEIGHT_DECAY
-        #params=[
-        #    {
-        #        "params": get_params(model.parameters, key="1x"),
-        #        "lr": CONFIG.SOLVER.LR,
-        #        "weight_decay": CONFIG.SOLVER.WEIGHT_DECAY,
-        #    },
-        #    {
-        #        "params": get_params(model.module, key="10x"),
-        #        "lr": 10 * CONFIG.SOLVER.LR,
-        #        "weight_decay": CONFIG.SOLVER.WEIGHT_DECAY,
-        #    },
-        #    {
-        #        "params": get_params(model.module, key="20x"),
-        #        "lr": 20 * CONFIG.SOLVER.LR,
-        #        "weight_decay": 0.0,
-        #    },
-        #],
-        #momentum=CONFIG.SOLVER.MOMENTUM,
     )
 
 
 
     # Setup loss logger
     writer = LogWriter(logdir=os.path.join(CONFIG.EXP.OUTPUT_DIR, "logs"))
-    #average_loss = MovingAverageValueMeter(CONFIG.SOLVER.AVERAGE_LOSS)
     average_loss = []
     # Path to save models
     checkpoint_dir = os.path.join(
@@ -199,7 +170,6 @@ def train(config_path, cuda):
 
     # Freeze the batch norm pre-trained on COCO
     model.train()
-    #model.module.base.freeze_bn()
 
     for iteration in tqdm(
         range(1, CONFIG.SOLVER.ITER_MAX + 1),
@@ -249,25 +219,6 @@ def train(config_path, cuda):
         # TensorBoard
         if iteration % CONFIG.SOLVER.ITER_TB == 0:
             writer.add_scalar(tag="loss/train", value=np.average(average_loss), step=iteration)
-            #for i, o in enumerate(optimizer.param_groups):
-            #    writer.add_scalar(tag="lr/group_{}".format(i), value=o["lr"], step=iteration)
-
-            #for i in range(torch.cuda.device_count()):
-            #    writer.add_scalar(
-            #        "gpu/device_{}/memory_cached".format(i),
-            #        torch.cuda.memory_cached(i) / 1024 ** 3,
-            #        iteration,
-            #    )
-
-            #if False:
-            #    for name, param in model.module.base.named_parameters():
-            #        name = name.replace(".", "/")
-            #         Weight/gradient distribution
-            #        writer.add_histogram(name, param, iteration, bins="auto")
-            #        if param.requires_grad:
-            #            writer.add_histogram(
-            #                name + "/grad", param.grad, iteration, bins="auto"
-            #            )
 
         # Save a model
         if iteration % CONFIG.SOLVER.ITER_SAVE == 0:
@@ -474,10 +425,6 @@ def crf(config_path, n_jobs):
 
         return label, gt_label
 
-    # CRF in multi-process
-    #results = joblib.Parallel(n_jobs=n_jobs, verbose=10, pre_dispatch="all")(
-    #    [joblib.delayed(process)(i) for i in range(len(dataset))]
-    #)
     results = [process(i) for i in tqdm(range(len(dataset)))]
 
     preds, gts = zip(*results)

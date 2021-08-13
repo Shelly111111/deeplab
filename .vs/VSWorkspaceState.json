@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\deeplabpaddle",
+    "\\deeplabpaddle\\data",
+    "\\deeplabpaddle\\libs",
+    "\\deeplabpaddle\\libs\\datasets"
+  ],
+  "SelectedNode": "\\deeplabpaddle\\libs\\datasets\\voc.py",
+  "PreviewInSolutionExplorer": false
+}

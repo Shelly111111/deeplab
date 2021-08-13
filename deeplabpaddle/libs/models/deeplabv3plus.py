@@ -51,7 +51,7 @@ class DeepLabV3Plus(nn.Layer):
                 [
                     ("conv1", _ConvBnReLU(304, 256, 3, 1, 1, 1)),
                     ("conv2", _ConvBnReLU(256, 256, 3, 1, 1, 1)),
-                    ("conv3", nn.Conv2d(256, n_classes, kernel_size=1)),
+                    ("conv3", nn.Conv2D(256, n_classes, kernel_size=1)),
                 ]
             )
         )
@@ -66,7 +66,7 @@ class DeepLabV3Plus(nn.Layer):
         h = self.aspp(h)
         h = self.fc1(h)
         h = F.interpolate(h, size=h_.shape[2:], mode="bilinear", align_corners=False)
-        h = paddle.cat((h, h_), dim=1)
+        h = paddle.concat((h, h_), axis=1)
         h = self.fc2(h)
         h = F.interpolate(h, size=x.shape[2:], mode="bilinear", align_corners=False)
         return h

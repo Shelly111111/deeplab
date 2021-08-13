@@ -1,4 +1,4 @@
-from .voc import VOC, VOCAug
+from .voc import VOC, VOCAug, CityScapes
 from .cocostuff import CocoStuff10k, CocoStuff164k
 
 
@@ -8,4 +8,5 @@ def get_dataset(name):
         "cocostuff164k": CocoStuff164k,
         "voc": VOC,
         "vocaug": VOCAug,
+        "cityscapes":CityScapes
     }[name]

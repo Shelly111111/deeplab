@@ -19,7 +19,7 @@ python torch2paddle.py
 cd deeplabpaddle
 python main.py train --config-path configs/voc12.yaml --cuda
 ```
-运行测试代码可使用
+运行测试voc12的代码可使用
 ```
 python main.py test --config-path configs/voc12.yaml --model-path  data/models/voc12/deeplabv2_resnet101_msc/train/deeplabv2_resnet101_msc-vocaug.pdparams
 ```
@@ -30,6 +30,14 @@ python main.py crf --config-path configs/voc12.yaml
 paddle最终得分文件在`deeplabpaddle/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`中，在VOC12上的miou为0.8987213899844988
 
 pytorch最终得分文件在`deeplabpytorch/data/scores/voc12/deeplabv2_resnet101_msc/val/scores.json`中，在VOC12上的miou为0.8987214672262349
+
+paddle在VOC12 crf后的得分文件在`deeplabpaddle/data/scores/voc12/deeplabv2_resnet101_msc/val/scores_crf.json`中，得分为0.9092208861996653
+
+更新了cityscapes数据集读取代码，但是精度还未达到要求。
+
+可使用`python main.py train --config-path configs/cityscapes.yaml --cuda`进行训练
+
+测试代码可使用`python main.py test --config-path configs/cityscapes.yaml --model-path  data/models/cityscapes/deeplabv2_resnet101_msc/train/checkpoint_final.pdparams`
 
 论文精度为：
 ![miou](miou.png)

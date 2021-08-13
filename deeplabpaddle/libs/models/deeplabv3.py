@@ -37,17 +37,17 @@ class _ASPP(nn.Layer):
 
     def __init__(self, in_ch, out_ch, rates):
         super(_ASPP, self).__init__()
-        self.stages = nn.Module()
-        self.stages.add_module("c0", _ConvBnReLU(in_ch, out_ch, 1, 1, 0, 1))
+        self.stages = nn.Layer()
+        self.stages.add_sublayer("c0", _ConvBnReLU(in_ch, out_ch, 1, 1, 0, 1))
         for i, rate in enumerate(rates):
-            self.stages.add_module(
+            self.stages.add_sublayer(
                 "c{}".format(i + 1),
                 _ConvBnReLU(in_ch, out_ch, 3, 1, padding=rate, dilation=rate),
             )
-        self.stages.add_module("imagepool", _ImagePool(in_ch, out_ch))
+        self.stages.add_sublayer("imagepool", _ImagePool(in_ch, out_ch))
 
     def forward(self, x):
-        return paddle.cat([stage(x) for stage in self.stages.children()], dim=1)
+        return paddle.concat([stage(x) for stage in self.stages.children()], axis=1)
 
 
 class DeepLabV3(nn.Sequential):

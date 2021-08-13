@@ -16,6 +16,39 @@ from paddle.io import DataLoader
 
 from .base import _BaseDataset
 
+class CityScapes(_BaseDataset):
+    """
+    CityScapes Segmentation dataset
+    """
+
+    def __init__(self, **kwargs):
+        super(CityScapes, self).__init__(**kwargs)
+
+    def _set_files(self):
+        self.root = '../cityscapes'
+        #self.image_dir = osp.join(self.root, "JPEGImages")
+        #self.label_dir = osp.join(self.root, "SegmentationClass")
+
+        if self.split in ["train", "trainval", "val", "test"]:
+            file_list = osp.join(
+                self.root, self.split + ".list"
+            )
+            file_list = tuple(open(file_list, "r"))
+            file_list = [id_.strip() for id_ in file_list]
+            self.files = file_list
+        else:
+            raise ValueError("Invalid split name: {}".format(self.split))
+
+    def _load_data(self, index):
+        # Set paths
+        image_id = self.files[index].split('/')[-1].split('.')[0]
+        image_path = osp.join(self.root, self.files[index].split(' ')[0])
+        label_path = osp.join(self.root, self.files[index].split(' ')[1])
+        # Load an image
+        image = cv2.imread(image_path, cv2.IMREAD_COLOR).astype(np.float32)
+        label = np.asarray(Image.open(label_path), dtype=np.int32)
+        return image_id, image, label
+
 
 class VOC(_BaseDataset):
     """
